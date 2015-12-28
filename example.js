@@ -17,18 +17,18 @@ touch.on('tap', function (loc) {
   console.log('tap at: ', loc)
 })
 
-touch.on('swipe:up', function (loc) {
-  console.log('swipe:up at: ', loc)
+touch.on('swipeUp', function (loc) {
+  console.log('swipeUp at: ', loc)
 })
 
-touch.on('swipe:down', function (loc) {
-  console.log('swipe:down at: ', loc)
+touch.on('swipeDown', function (loc) {
+  console.log('swipeDown at: ', loc)
 })
 
-touch.on('swipe:left', function (loc) {
-  console.log('swipe:left at: ', loc)
+touch.on('swipeLeft', function (loc) {
+  console.log('swipeLeft at: ', loc)
 })
 
-touch.on('swipe:right', function (loc) {
-  console.log('swipe:right at: ', loc)
+touch.on('swipeRight', function (loc) {
+  console.log('swipeRight at: ', loc)
 })

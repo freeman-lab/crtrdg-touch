@@ -31,14 +31,19 @@ Touch.prototype.initialize = function () {
   touchy.enableOn(self.el)
   var p = position(self.el)
 
-  var events = ['tap', 'swipe:left', 'swipe:right', 'swipe:up', 'swipe:down']
+  var events = ['swipe:left', 'swipe:right', 'swipe:up', 'swipe:down']
 
-  _.forEach(events, function (name) {
+  var labels = ['<swipeLeft>', '<swipeRight>', '<swipeUp>', '<swipeDown>']
+
+  _.forEach(events, function (name, i) {
     self.el.addEventListener(name, function (e) {
       self.offset(e, p, function (location) {
         self.down = {}
-        self.down[name] = true
-        self.emit(name, location)
+        self.down[labels[i]] = true
+        self.emit(labels[i], location)
+        setTimeout( function() {
+          self.down = {}
+        }, 100)
       })
       return false
     }, false)

@@ -1,0 +1,35 @@
+{
+  "name": "crtrdg-touch",
+  "version": "1.0.0",
+  "description": "touch module for crtrdg.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard",
+    "start": "budo example.js --live"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freeman-lab/crtrdg-touch.git"
+  },
+  "keywords": [
+    "touch",
+    "swipe",
+    "tap",
+    "games"
+  ],
+  "author": "freeman-lab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freeman-lab/crtrdg-touch/issues"
+  },
+  "homepage": "https://github.com/freeman-lab/crtrdg-touch#readme",
+  "dependencies": {
+    "eventemitter2": "^0.4.14",
+    "inherits": "^2.0.1",
+    "touch-position": "^1.1.0",
+    "touchy": "^0.1.6"
+  },
+  "devDependencies": {
+    "crtrdg-gameloop": "^1.0.3"
+  }
+}

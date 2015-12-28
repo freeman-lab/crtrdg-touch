@@ -1,7 +1,8 @@
-var EventEmitter = require('eventemitter2').EventEmitter2
+var _ = require('lodash')
 var inherits = require('inherits')
 var touchy = require('touchy')
 var position = require('touch-position')
+var EventEmitter = require('eventemitter2').EventEmitter2
 
 module.exports = Touch
 inherits(Touch, EventEmitter)
@@ -21,31 +22,30 @@ function Touch (game) {
   if (!(this instanceof Touch)) return new Touch(game)
   this.game = game || {}
   this.el = game.el || game.canvas || document
-  this.location = {x: 0, y: 0}
-  this.initializeListeners()
+  this.down = {}
+  this.initialize()
 }
 
-Touch.prototype.initializeListeners = function () {
+Touch.prototype.initialize = function () {
   var self = this
   touchy.enableOn(self.el)
   var p = position(self.el)
 
-  self.el.addEventListener('tap', function (e) {
-    self.calculateOffset(e, p, function (location) {
-      self.emit('tap', location)
-    })
-    return false
-  }, false)
+  var events = ['tap', 'swipe:left', 'swipe:right', 'swipe:up', 'swipe:down']
 
-  self.el.addEventListener('swipe:left', function (e) {
-    self.calculateOffset(e, p, function (location) {
-      self.emit('swipe:left', location)
-    })
-    return false
-  }, false)
+  _.forEach(events, function (name) {
+    self.el.addEventListener(name, function (e) {
+      self.offset(e, p, function (location) {
+        self.down = {}
+        self.down[name] = true
+        self.emit(name, location)
+      })
+      return false
+    }, false)
+  })
 }
 
-Touch.prototype.calculateOffset = function (e, p, callback) {
+Touch.prototype.offset = function (e, p, callback) {
   var canvas = e.target
 
   var location = {

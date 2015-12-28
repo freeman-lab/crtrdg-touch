@@ -8,7 +8,6 @@ document.body.appendChild(canvas)
 var game = new Game({
   canvas: canvas
 })
-
 game.width = canvas.width = 800
 game.height = canvas.height = 400 
 
@@ -18,6 +17,18 @@ touch.on('tap', function (loc) {
   console.log('tap at: ', loc)
 })
 
+touch.on('swipe:up', function (loc) {
+  console.log('swipe:up at: ', loc)
+})
+
+touch.on('swipe:down', function (loc) {
+  console.log('swipe:down at: ', loc)
+})
+
 touch.on('swipe:left', function (loc) {
   console.log('swipe:left at: ', loc)
+})
+
+touch.on('swipe:right', function (loc) {
+  console.log('swipe:right at: ', loc)
 })

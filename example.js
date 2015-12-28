@@ -13,22 +13,34 @@ game.height = canvas.height = 400
 
 var touch = new Touch(game)
 
-touch.on('tap', function (loc) {
-  console.log('tap at: ', loc)
+touch.on('<tapUp>', function (loc) {
+  console.log('tapUp at: ', loc)
 })
 
-touch.on('swipeUp', function (loc) {
+touch.on('<tapDown>', function (loc) {
+  console.log('tapDown at: ', loc)
+})
+
+touch.on('<tapLeft>', function (loc) {
+  console.log('tapLeft at: ', loc)
+})
+
+touch.on('<tapRight>', function (loc) {
+  console.log('tapRight at: ', loc)
+})
+
+touch.on('<swipeUp>', function (loc) {
   console.log('swipeUp at: ', loc)
 })
 
-touch.on('swipeDown', function (loc) {
+touch.on('<swipeDown>', function (loc) {
   console.log('swipeDown at: ', loc)
 })
 
-touch.on('swipeLeft', function (loc) {
+touch.on('<swipeLeft>', function (loc) {
   console.log('swipeLeft at: ', loc)
 })
 
-touch.on('swipeRight', function (loc) {
+touch.on('<swipeRight>', function (loc) {
   console.log('swipeRight at: ', loc)
 })

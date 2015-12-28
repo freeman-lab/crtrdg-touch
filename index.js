@@ -22,6 +22,10 @@ function Touch (game) {
   if (!(this instanceof Touch)) return new Touch(game)
   this.game = game || {}
   this.el = game.el || game.canvas || document
+  this.left = this.el.offsetLeft + this.el.scrollLeft
+  this.top = this.el.offsetTop + this.el.scrollTop
+  this.width = this.el.clientWidth
+  this.height = this.el.clientHeight
   this.down = {}
   this.initialize()
 }
@@ -29,7 +33,7 @@ function Touch (game) {
 Touch.prototype.initialize = function () {
   var self = this
   touchy.enableOn(self.el)
-  var p = position(self.el)
+  var xy = position(self.el)
 
   var events = ['swipe:left', 'swipe:right', 'swipe:up', 'swipe:down']
 
@@ -37,10 +41,10 @@ Touch.prototype.initialize = function () {
 
   _.forEach(events, function (name, i) {
     self.el.addEventListener(name, function (e) {
-      self.offset(e, p, function (location) {
+      self.offset(e, xy, function (loc) {
+        self.emit(labels[i], loc)
         self.down = {}
         self.down[labels[i]] = true
-        self.emit(labels[i], location)
         setTimeout( function() {
           self.down = {}
         }, 100)
@@ -48,15 +52,34 @@ Touch.prototype.initialize = function () {
       return false
     }, false)
   })
+
+  self.el.addEventListener('tap', function (e) {
+    self.offset(e, xy, function (loc) {
+      var name = '<tap>'
+      var left = loc.x / self.width
+      var top = loc.y / self.height
+      if (left <= 0.3) name = '<tapLeft>'
+      if (left >= 0.6) name = '<tapRight>'
+      if (left > 0.3 & left < 0.6 & top < 0.5) name = '<tapUp>'
+      if (left > 0.3 & left < 0.6 & top >= 0.5) name = '<tapDown>'
+      self.emit(name, loc)
+      self.down = {}
+      self.down[name] = true
+      setTimeout( function() {
+          self.down = {}
+        }, 100)
+    })
+    return false
+  }, false)
 }
 
-Touch.prototype.offset = function (e, p, callback) {
-  var canvas = e.target
+Touch.prototype.offset = function (e, xy, callback) {
+  var self = this
 
-  var location = {
-    x: p[0] - canvas.offsetLeft - canvas.scrollLeft,
-    y: p[1] - canvas.offsetTop - canvas.scrollTop
+  var loc = {
+    x: xy[0] - self.left,
+    y: xy[1] - self.top
   }
 
-  callback(location)
+  callback(loc)
 }

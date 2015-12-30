@@ -22,8 +22,10 @@ function Touch (game) {
   if (!(this instanceof Touch)) return new Touch(game)
   this.game = game || {}
   this.el = game.el || game.canvas || document
-  this.left = this.el.offsetLeft + this.el.scrollLeft
-  this.top = this.el.offsetTop + this.el.scrollTop
+  this.left = this.el.scrollLeft + this.el.offsetLeft + 
+    (this.el.offsetParent ? this.el.offsetParent.offsetLeft : 0)
+  this.top = this.el.scrollTop + this.el.offsetTop + 
+    (this.el.offsetParent ? this.el.offsetParent.offsetTop : 0)
   this.width = this.el.clientWidth
   this.height = this.el.clientHeight
   this.down = {}
@@ -32,11 +34,10 @@ function Touch (game) {
 
 Touch.prototype.initialize = function () {
   var self = this
+  
   touchy.enableOn(self.el)
   var xy = position(self.el)
-
   var events = ['swipe:left', 'swipe:right', 'swipe:up', 'swipe:down']
-
   var labels = ['<swipeLeft>', '<swipeRight>', '<swipeUp>', '<swipeDown>']
 
   _.forEach(events, function (name, i) {
@@ -58,10 +59,10 @@ Touch.prototype.initialize = function () {
       var name = '<tap>'
       var left = loc.x / self.width
       var top = loc.y / self.height
-      if (left <= 0.3) name = '<tapLeft>'
-      if (left >= 0.6) name = '<tapRight>'
-      if (left > 0.3 & left < 0.6 & top < 0.5) name = '<tapUp>'
-      if (left > 0.3 & left < 0.6 & top >= 0.5) name = '<tapDown>'
+      if (left < 0.5 & top < 0.5) name = '<tapUpLeft>'
+      if (left >= 0.5 & top < 0.5) name = '<tapUpRight>'
+      if (left < 0.5 & top >= 0.5) name = '<tapDownLeft>'
+      if (left >= 0.5 & top >= 0.5) name = '<tapDownRight>'
       self.emit(name, loc)
       self.down = {}
       self.down[name] = true

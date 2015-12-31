@@ -16,7 +16,7 @@ inside this module, click and swipe on the canvas element, and check the console
 
 ## API
 
-### create
+### `create`
 
 create the touch object and add to an existing game
 

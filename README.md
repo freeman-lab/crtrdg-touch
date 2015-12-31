@@ -2,11 +2,11 @@
 
 > touch event module for crtrdg games
 
-## Install
+## install
 
     npm install --save crtrdg-touch
 
-## Example
+## example
 
 call
 
@@ -36,11 +36,11 @@ tap events
 
 divides the target into four quadrants, with events `<tapUpLeft>`, `<tapUpRight>`, `<tapDownLeft>`, `<tapDownRight>`
 
-**Parameters**
+**parameters**
 
--   `location` **String** touch location of tap
+-   `location` **Object** touch location of tap e.g. `{x: 50, y: 100}`
 
-**Examples**
+**examples**
 
 ```javascript
 keyboard.on('<tapUpLeft>', function (location) {
@@ -54,11 +54,11 @@ swipe events
 
 includes `<swipeLeft>`, `<swipeRight>`, `<swipeUp>`, `<swipeDown>`
 
-**Parameters**
+**parameters**
 
--   `location` **Array** touch location at end of swipe
+-   `location` **Object** touch location at end of swipe e.g. `{x: 50, y: 100}`
 
-**Examples**
+**examples**
 
 ```javascript
 touch.on('<swipeLeft>', function (location) {
@@ -70,11 +70,14 @@ touch.on('<swipeLeft>', function (location) {
 
 object with current touch events set to true, where current is defined by the 100ms following a touch
 
-**Examples**
+**examples**
 
 ```javascript
-touch.down
->> {<swipeRight>: true}
+touch.on('<swipeLeft>', function (location) {
+  console.log(touch.down)
+})
+
+>> {<swipeLeft>: true}
 ```
 
 ## Contributing

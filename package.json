@@ -31,6 +31,7 @@
     "touchy": "^0.1.6"
   },
   "devDependencies": {
+    "budo": "^7.1.0",
     "crtrdg-gameloop": "^1.0.3"
   }
 }

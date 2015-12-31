@@ -43,9 +43,9 @@ Touch.prototype.initialize = function () {
   _.forEach(events, function (name, i) {
     self.el.addEventListener(name, function (e) {
       self.offset(e, xy, function (loc) {
-        self.emit(labels[i], loc)
         self.down = {}
         self.down[labels[i]] = true
+        self.emit(labels[i], loc)
         setTimeout( function() {
           self.down = {}
         }, 100)
@@ -63,9 +63,9 @@ Touch.prototype.initialize = function () {
       if (left >= 0.5 & top < 0.5) name = '<tapUpRight>'
       if (left < 0.5 & top >= 0.5) name = '<tapDownLeft>'
       if (left >= 0.5 & top >= 0.5) name = '<tapDownRight>'
-      self.emit(name, loc)
       self.down = {}
       self.down[name] = true
+      self.emit(name, loc)
       setTimeout( function() {
           self.down = {}
         }, 100)

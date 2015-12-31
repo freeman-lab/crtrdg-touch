@@ -20,8 +20,6 @@ inside this module, click and swipe on the canvas element, and check the console
 
 create the touch object and add to an existing game
 
-**Examples**
-
 ```javascript
 var Game = require('crtrdg-game')
 var Touch = require('crtrdg-touch')
@@ -32,7 +30,7 @@ var touch = Touch(game)
 
 if ``game`` is not provided, will attach touch events to `document`
 
-### keyboard#<tap*>
+### `touch.on('<tap*>')`
 
 tap events
 
@@ -40,7 +38,7 @@ divides the target into four quadrants, with events `<tapUpLeft>`, `<tapUpRight>
 
 **Parameters**
 
--   `location` **String**, touch location of tap
+-   `location` **String** touch location of tap
 
 **Examples**
 
@@ -50,7 +48,7 @@ keyboard.on('<tapUpLeft>', function (location) {
 })
 ```
 
-### touch#<swipe*>
+### `touch.on('<swipe*>')`
 
 swipe events
 
@@ -58,7 +56,7 @@ includes `<swipeLeft>`, `<swipeRight>`, `<swipeUp>`, `<swipeDown>`
 
 **Parameters**
 
--   `location` **array**, touch location at end of swipe
+-   `location` **Array** touch location at end of swipe
 
 **Examples**
 
@@ -68,7 +66,7 @@ touch.on('<swipeLeft>', function (location) {
 })
 ```
 
-### touch#down
+### `touch.down`
 
 object with current touch events set to true, where current is defined by the 100ms following a touch
 

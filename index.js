@@ -21,7 +21,7 @@ inherits(Touch, EventEmitter)
 function Touch (game) {
   if (!(this instanceof Touch)) return new Touch(game)
   this.game = game || {}
-  this.el = game.el || game.canvas || document
+  this.el = game.el || game.canvas || game.renderer.canvas || document
   this.left = this.el.scrollLeft + this.el.offsetLeft + 
     (this.el.offsetParent ? this.el.offsetParent.offsetLeft : 0)
   this.top = this.el.scrollTop + this.el.offsetTop + 

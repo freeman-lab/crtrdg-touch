@@ -22,9 +22,9 @@ function Touch (game) {
   if (!(this instanceof Touch)) return new Touch(game)
   this.game = game || {}
   this.el = game.el || game.canvas || game.renderer.canvas || document
-  this.left = this.el.scrollLeft + this.el.offsetLeft + 
+  this.left = this.el.scrollLeft + this.el.offsetLeft +
     (this.el.offsetParent ? this.el.offsetParent.offsetLeft : 0)
-  this.top = this.el.scrollTop + this.el.offsetTop + 
+  this.top = this.el.scrollTop + this.el.offsetTop +
     (this.el.offsetParent ? this.el.offsetParent.offsetTop : 0)
   this.width = this.el.clientWidth
   this.height = this.el.clientHeight
@@ -34,7 +34,7 @@ function Touch (game) {
 
 Touch.prototype.initialize = function () {
   var self = this
-  
+
   touchy.enableOn(self.el)
   var xy = position(self.el)
   var events = ['swipe:left', 'swipe:right', 'swipe:up', 'swipe:down']
@@ -46,7 +46,7 @@ Touch.prototype.initialize = function () {
         self.down = {}
         self.down[labels[i]] = true
         self.emit(labels[i], loc)
-        setTimeout( function() {
+        setTimeout(function () {
           self.down = {}
         }, 100)
       })
@@ -66,9 +66,9 @@ Touch.prototype.initialize = function () {
       self.down = {}
       self.down[name] = true
       self.emit(name, loc)
-      setTimeout( function() {
-          self.down = {}
-        }, 100)
+      setTimeout(function () {
+        self.down = {}
+      }, 100)
     })
     return false
   }, false)

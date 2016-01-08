@@ -9,7 +9,7 @@ var game = new Game({
   canvas: canvas
 })
 game.width = canvas.width = 800
-game.height = canvas.height = 400 
+game.height = canvas.height = 400
 
 var touch = new Touch(game)
 

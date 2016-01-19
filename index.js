@@ -56,22 +56,31 @@ Touch.prototype.initialize = function () {
 
   self.el.addEventListener('tap', function (e) {
     self.offset(e, xy, function (loc) {
-      var name = '<tap>'
+      var names = []
       var left = loc.x / self.width
       var top = loc.y / self.height
-      if (left < 0.5 & top < 0.5) name = '<tapUpLeft>'
-      if (left >= 0.5 & top < 0.5) name = '<tapUpRight>'
-      if (left < 0.5 & top >= 0.5) name = '<tapDownLeft>'
-      if (left >= 0.5 & top >= 0.5) name = '<tapDownRight>'
+      if (left < 0.5 & top < 0.5) names.push('<tapUpLeft>')
+      if (left >= 0.5 & top < 0.5) names.push('<tapUpRight>')
+      if (left < 0.5 & top >= 0.5) names.push('<tapDownLeft>')
+      if (left >= 0.5 & top >= 0.5) names.push('<tapDownRight>')
+      if (left < 1/3) names.push('<tapLeft>')
+      if (left >= 1/3 & left < 2/3) names.push('<tapCenter>')
+      if (left > 2/3) names.push('<tapRight>')
+      if (top < 1/3) names.push('<tapUp>')
+      if (top >= 1/3 & top < 2/3) names.push('<tapMiddle>')
+      if (top > 2/3) names.push('<tapDown>')
       self.down = {}
-      self.down[name] = true
-      self.emit(name, loc)
+      names.forEach(function (name) {
+        self.down[name] = true
+        self.emit(name, loc)
+      })
       setTimeout(function () {
         self.down = {}
       }, 100)
     })
     return false
   }, false)
+
 }
 
 Touch.prototype.offset = function (e, xy, callback) {

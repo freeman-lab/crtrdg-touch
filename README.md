@@ -34,7 +34,10 @@ if ``game`` is not provided, will attach touch events to `document`
 
 tap events
 
-divides the target into four quadrants, with events `<tapUpLeft>`, `<tapUpRight>`, `<tapDownLeft>`, `<tapDownRight>`
+provides a few common subdivions of the canvas, with the following event sets:
+- quadrants `<tapUpLeft>`, `<tapUpRight>`, `<tapDownLeft>`, `<tapDownRight>`
+- horizontal thirds `<tapLeft>`, `<tapCenter>`, `<tapRight>`
+- vertical thirds `<tapUp>`, `<tapMiddle>`, `<tapDown>`
 
 **parameters**
 
